@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import priceController from './controllers/price.js';
+import cors from "cors";
 import userController from './controllers/user.js'
 import { authMiddleware } from './middleware/auth.js';
 
@@ -18,8 +19,8 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (error) => console.log(error));
 
 app.use(express.json());
-
-app.use('/api/price',authMiddleware, priceController);
+app.use(cors());
+app.use('/api/price', priceController);
 app.use('/user',userController);
 app.get('/', (req, res) => {
   res.json('Hi there!');

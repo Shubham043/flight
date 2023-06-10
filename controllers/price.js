@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   const age = await userModel.age;
   try {
-    const { source, destination } = req.body;
+    const { source, destination } = req.query;
     const price = await priceModel.findOne({ source, destination });
    if(age<18){
    price = price/2;
